@@ -1,0 +1,68 @@
+.homePage {
+  background-color: #f0f2f5;
+}
+
+.heroBanner {
+  padding: 1rem 5%;
+}
+
+.heroBanner img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.showcase {
+  padding: 2rem 5%;
+}
+
+.showcaseTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.productCard {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.productCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.productCard img {
+  max-width: 80%;
+  height: 180px;
+  object-fit: contain;
+}
+
+.productCard h3 {
+  font-size: 1rem;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.productCard p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e44d26;
+}
+
+/* Add this at the end of the file */
+.productLink {
+  text-decoration: none;
+  color: inherit;
+}

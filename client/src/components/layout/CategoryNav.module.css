@@ -1,0 +1,28 @@
+.categoryNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem 5%;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.categoryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  margin: 0 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.categoryItem svg {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.categoryItem:hover {
+  color: #007bff;
+}

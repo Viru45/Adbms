@@ -1,0 +1,79 @@
+/* Main container to center everything */
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+/* The form itself, designed as a "card" */
+.authCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.authCard h1 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* The form element */
+.authForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for input fields */
+.input {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Style for the submit button */
+.button {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+/* Style for the link at the bottom */
+.switchLink {
+  margin-top: 1.5rem;
+  color: #555;
+}
+
+.switchLink a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.switchLink a:hover {
+  text-decoration: underline;
+}

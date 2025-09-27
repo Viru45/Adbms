@@ -1,9 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-// Make sure you are EXPORTING the context here
+// ✅ MUST have 'export' here
 export const AuthContext = createContext();
 
-// Make sure you are also EXPORTING the provider component here
+// ✅ MUST have 'export' here
 export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
 
