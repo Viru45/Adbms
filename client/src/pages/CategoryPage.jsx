@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import homeStyles from './HomePage.module.css'; // Reuse homepage styles
+import homeStyles from './HomePage.module.css';
+import Pagination from '../components/common/Pagination.jsx'; // Make sure this component exists and the path is correct
 
 const CategoryPage = () => {
-  const { categoryName } = useParams();
+  const { categoryName, pageNumber } = useParams();
   const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -13,8 +16,11 @@ const CategoryPage = () => {
     const fetchProductsByCategory = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(`/api/products?category=${categoryName}`);
-        setProducts(data);
+        // We also need to send the page number to the API
+        const { data } = await axios.get(`/api/products?category=${categoryName}&pageNumber=${pageNumber || 1}`);
+        setProducts(data.products); // <-- THIS IS THE FIX
+        setPage(data.page);
+        setPages(data.pages);
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch products');
@@ -22,7 +28,7 @@ const CategoryPage = () => {
       }
     };
     fetchProductsByCategory();
-  }, [categoryName]);
+  }, [categoryName, pageNumber]);
 
   return (
     <div className={homeStyles.homePage}>
@@ -35,17 +41,20 @@ const CategoryPage = () => {
         ) : products.length === 0 ? (
             <p>No products found in this category. <Link to="/">Go Back</Link></p>
         ) : (
-          <div className={homeStyles.productGrid}>
-            {products.map(product => (
-              <Link to={`/product/${product._id}`} key={product._id} className={homeStyles.productLink}>
-                <div className={homeStyles.productCard}>
-                  <img src={product.image} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <p>₹{product.price}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <>
+            <div className={homeStyles.productGrid}>
+              {products.map(product => (
+                <Link to={`/product/${product._id}`} key={product._id} className={homeStyles.productLink}>
+                  <div className={homeStyles.productCard}>
+                    <img src={product.image} alt={product.name} />
+                    <h3>{product.name}</h3>
+                    <p>₹{product.price}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <Pagination pages={pages} page={page} category={categoryName} />
+          </>
         )}
       </section>
     </div>
