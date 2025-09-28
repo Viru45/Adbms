@@ -1,7 +1,7 @@
 import Product from '../models/productModel.js';
 
-// @desc    Fetch all products (or by category)
-// @route   GET /api/products?category=...
+// @desc    Fetch all products (with pagination + filters)
+// @route   GET /api/products?category=&keyword=&pageNumber=
 // @access  Public
 const getProducts = async (req, res) => {
   try {
@@ -23,14 +23,20 @@ const getProducts = async (req, res) => {
 
     // Find the products for the current page
     const products = await Product.find({ ...keyword, ...category })
+      .select('_id name image price brand category countInStock') // ✅ ensure _id
       .limit(pageSize)
       .skip(pageSize * (page - 1));
 
     // Send back the products, current page, and total number of pages
-    res.json({ products, page, pages: Math.ceil(count / pageSize) });
+    res.json({
+      products,
+      page,
+      pages: Math.ceil(count / pageSize),
+      count,
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error', error: error.message });
   }
 };
 
@@ -54,7 +60,7 @@ const createProduct = async (req, res) => {
     res.status(201).json(createdProduct);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error', error: error.message });
   }
 };
 
@@ -68,11 +74,11 @@ const getProductById = async (req, res) => {
     if (product) {
       res.json(product);
     } else {
-      res.status(404).send('Product not found');
+      res.status(404).json({ message: 'Product not found' });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server Error: Invalid Product ID');
+    res.status(500).json({ message: 'Server Error: Invalid Product ID', error: error.message });
   }
 };
 
@@ -96,11 +102,11 @@ const updateProduct = async (req, res) => {
       const updatedProduct = await product.save();
       res.json(updatedProduct);
     } else {
-      res.status(404).send('Product not found');
+      res.status(404).json({ message: 'Product not found' });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error', error: error.message });
   }
 };
 
@@ -112,21 +118,21 @@ const deleteProduct = async (req, res) => {
     const product = await Product.findById(req.params.id);
 
     if (product) {
-      await product.deleteOne();
+      await Product.findByIdAndDelete(req.params.id); // ✅ simpler delete
       res.json({ message: 'Product removed' });
     } else {
-      res.status(404).send('Product not found');
+      res.status(404).json({ message: 'Product not found' });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server Error');
+    res.status(500).json({ message: 'Server Error', error: error.message });
   }
 };
 
-export { 
-  getProducts, 
-  createProduct, 
-  getProductById, 
-  updateProduct, 
-  deleteProduct 
+export {
+  getProducts,
+  createProduct,
+  getProductById,
+  updateProduct,
+  deleteProduct,
 };

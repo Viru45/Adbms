@@ -27,13 +27,13 @@ import AdminRoute from './components/auth/AdminRoute.jsx';
 function App() {
   return (
     <Routes>
-      {/* Routes that DON'T use the main layout */}
+      {/* Standalone public routes */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
-      {/* Routes that DO use the main layout */}
+      {/* Main application layout */}
       <Route path="/" element={<MainLayout />}>
-        {/* Publicly accessible pages */}
+        {/* Public pages */}
         <Route index element={<HomePage />} />
         <Route path="page/:pageNumber" element={<HomePage />} />
         <Route path="product/:id" element={<ProductDetailsPage />} />
@@ -43,8 +43,8 @@ function App() {
         <Route path="category/:categoryName/page/:pageNumber" element={<CategoryPage />} />
         <Route path="contact" element={<ContactPage />} />
 
-        {/* Protected routes for logged-in users */}
-        <Route path="" element={<ProtectedRoute />}>
+        {/* Protected user pages */}
+        <Route element={<ProtectedRoute />}>
           <Route path="wishlist" element={<WishlistPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="shipping" element={<ShippingPage />} />
@@ -54,10 +54,11 @@ function App() {
           <Route path="profile" element={<ProfilePage />} />
         </Route>
 
-        {/* Protected routes for ADMIN users only */}
-        <Route path="admin" element={<AdminRoute />}>
-          <Route path="products" element={<AdminProductsPage />} />
-          <Route path="product/:id/edit" element={<ProductEditPage />} />
+        {/* Protected admin pages */}
+        <Route element={<AdminRoute />}>
+          <Route path="admin/products" element={<AdminProductsPage />} />
+          <Route path="admin/products/page/:pageNumber" element={<AdminProductsPage />} />
+          <Route path="admin/product/:id/edit" element={<ProductEditPage />} />
         </Route>
       </Route>
     </Routes>

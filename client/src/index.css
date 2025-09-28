@@ -1,0 +1,28 @@
+/* client/src/index.css */
+
+/* Light Theme Variables (Default) */
+:root {
+  --background-color: #f0f2f5;
+  --card-bg: #ffffff;
+  --header-bg: #ffffff;
+  --text-primary: #1c1c1e;
+  --text-secondary: #666;
+  --primary-color: #007bff;
+  --border-color: #ddd;
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --background-color: #1c1c1e;
+  --card-bg: #2c2c2e;
+  --header-bg: #2c2c2e;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --primary-color: #0a84ff;
+  --border-color: #444;
+}
+
+/* Add a smooth transition for color changes */
+body {
+  transition: background-color 0.3s, color 0.3s;
+}

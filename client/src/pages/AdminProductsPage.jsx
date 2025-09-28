@@ -8,7 +8,7 @@ import Pagination from '../components/common/Pagination.jsx';
 
 const AdminProductsPage = () => {
   const { userInfo } = useContext(AuthContext);
-  const { pageNumber } = useParams() || { pageNumber: 1 };
+  const { pageNumber = 1 } = useParams();
   
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -16,11 +16,11 @@ const AdminProductsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (currentPage) => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/products?pageNumber=${pageNumber}`);
-      setProducts(data.products); // <-- THIS IS THE FIX
+      const { data } = await axios.get(`/api/products?pageNumber=${currentPage}`);
+      setProducts(data.products);
       setPage(data.page);
       setPages(data.pages);
       setLoading(false);
@@ -31,7 +31,7 @@ const AdminProductsPage = () => {
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchProducts(pageNumber);
   }, [pageNumber]);
 
   const createProductHandler = async () => {
@@ -39,7 +39,7 @@ const AdminProductsPage = () => {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
         await axios.post('/api/products', {}, config);
-        fetchProducts(); 
+        fetchProducts(1);
       } catch (err) {
         alert('Could not create product. See console for details.');
         console.error(err);
@@ -52,7 +52,7 @@ const AdminProductsPage = () => {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
         await axios.delete(`/api/products/${id}`, config);
-        fetchProducts();
+        fetchProducts(pageNumber);
       } catch (err) {
         alert('Could not delete product.');
         console.error(err);

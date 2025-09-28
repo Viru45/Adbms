@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { CartContext } from '../../context/CartContext';
 import styles from './Header.module.css';
 import { FiSearch, FiShoppingCart, FiHeart, FiUser, FiShield } from 'react-icons/fi';
+import ThemeToggle from '../common/ThemeToggle.jsx'; // 1. Import ThemeToggle
 
 const Header = () => {
   const { userInfo, logout } = useContext(AuthContext);
@@ -47,6 +48,7 @@ const Header = () => {
         </form>
 
         <div className={styles.userActions}>
+          <ThemeToggle /> {/* 2. Add the toggle button */}
           <Link to="/cart" className={styles.actionItem}>
             <FiShoppingCart />
             <span>Cart</span>
@@ -68,7 +70,6 @@ const Header = () => {
                   <span>Admin</span>
                 </Link>
               )}
-              {/* --- THIS IS THE UPDATED PART --- */}
               <div className={styles.actionItem}>
                 <Link to="/profile" className={styles.actionItem}>
                   <FiUser />
