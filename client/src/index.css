@@ -1,6 +1,3 @@
-/* client/src/index.css */
-
-/* Light Theme Variables (Default) */
 :root {
   --background-color: #f0f2f5;
   --card-bg: #ffffff;
@@ -11,7 +8,6 @@
   --border-color: #ddd;
 }
 
-/* Dark Theme Variables */
 .dark-theme {
   --background-color: #1c1c1e;
   --card-bg: #2c2c2e;
@@ -22,7 +18,6 @@
   --border-color: #444;
 }
 
-/* Add a smooth transition for color changes */
 body {
   transition: background-color 0.3s, color 0.3s;
 }

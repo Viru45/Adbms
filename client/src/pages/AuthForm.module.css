@@ -5,12 +5,12 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: var(--background-color); /* Changed */
+  background-color: #f0f2f5;
 }
 
 /* The form itself, designed as a "card" */
 .authCard {
-  background: var(--card-bg); /* Changed */
+  background: white;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -21,7 +21,7 @@
 
 .authCard h1 {
   margin-bottom: 1.5rem;
-  color: var(--text-primary); /* Changed */
+  color: #333;
 }
 
 /* The form element */
@@ -34,16 +34,14 @@
 .input {
   margin-bottom: 1rem;
   padding: 0.8rem;
-  border: 1px solid var(--border-color); /* Changed */
+  border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
-  background: var(--background-color); /* Changed for dark mode visibility */
-  color: var(--text-primary); /* Changed for dark mode visibility */
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--primary-color); /* Changed */
+  border-color: #007bff;
   box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
@@ -52,7 +50,7 @@
   padding: 0.8rem;
   border: none;
   border-radius: 4px;
-  background-color: var(--primary-color); /* Changed */
+  background-color: #007bff;
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -61,17 +59,17 @@
 }
 
 .button:hover {
-  opacity: 0.9;
+  background-color: #0056b3;
 }
 
 /* Style for the link at the bottom */
 .switchLink {
   margin-top: 1.5rem;
-  color: var(--text-secondary); /* Changed */
+  color: #555;
 }
 
 .switchLink a {
-  color: var(--primary-color); /* Changed */
+  color: #007bff;
   text-decoration: none;
   font-weight: bold;
 }
