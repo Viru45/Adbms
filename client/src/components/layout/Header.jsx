@@ -1,18 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { CartContext } from '../../context/CartContext'; // 1. Import CartContext
+import { CartContext } from '../../context/CartContext';
 import styles from './Header.module.css';
 import { FiSearch, FiShoppingCart, FiHeart, FiUser, FiShield } from 'react-icons/fi';
 
 const Header = () => {
   const { userInfo, logout } = useContext(AuthContext);
-  const { cartItems } = useContext(CartContext); // 2. Get cartItems from context
+  const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
+
+  const [keyword, setKeyword] = useState('');
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+  
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (keyword.trim()) {
+      navigate(`/search/${keyword}`);
+      setKeyword('');
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -23,15 +35,21 @@ const Header = () => {
       </div>
       <div className={styles.mainHeader}>
         <Link to="/" className={styles.logo}>The Gadget Hub</Link>
-        <div className={styles.searchBar}>
+
+        <form onSubmit={submitHandler} className={styles.searchBar}>
           <FiSearch />
-          <input type="text" placeholder="Search Products & Brands" />
-        </div>
+          <input 
+            type="text" 
+            placeholder="Search Products & Brands"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+        </form>
+
         <div className={styles.userActions}>
           <Link to="/cart" className={styles.actionItem}>
             <FiShoppingCart />
             <span>Cart</span>
-            {/* 3. Display badge with item count */}
             {cartItems.length > 0 && (
               <span className={styles.cartBadge}>
                 {cartItems.reduce((acc, item) => acc + item.qty, 0)}
@@ -50,9 +68,12 @@ const Header = () => {
                   <span>Admin</span>
                 </Link>
               )}
+              {/* --- THIS IS THE UPDATED PART --- */}
               <div className={styles.actionItem}>
-                <FiUser />
-                <span>{userInfo.name}</span>
+                <Link to="/profile" className={styles.actionItem}>
+                  <FiUser />
+                  <span>{userInfo.name}</span>
+                </Link>
                 <button onClick={handleLogout} className={styles.actionItem}>(Logout)</button>
               </div>
             </>

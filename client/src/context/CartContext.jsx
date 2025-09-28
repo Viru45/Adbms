@@ -14,6 +14,11 @@ export const CartProvider = ({ children }) => {
 
   // --- CART ACTIONS ---
 
+  const clearCart = () => {
+      setCartItems([]);
+      localStorage.removeItem('cartItems');
+    };
+
   // Add an item to the cart (or update its quantity)
   const addToCart = (product, qty) => {
     const exist = cartItems.find((x) => x._id === product._id);
@@ -37,8 +42,8 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
+        {children}
+      </CartContext.Provider>
   );
 };

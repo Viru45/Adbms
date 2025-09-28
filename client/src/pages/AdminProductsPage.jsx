@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // 1. Import Link
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import styles from './AdminProductsPage.module.css';
 import homeStyles from './HomePage.module.css';
@@ -12,7 +12,15 @@ const AdminProductsPage = () => {
   const [error, setError] = useState('');
 
   const fetchProducts = async () => {
-    // ... same as before
+    try {
+      setLoading(true);
+      const { data } = await axios.get('/api/products');
+      setProducts(data);
+      setLoading(false);
+    } catch (err) {
+      setError('Failed to fetch products');
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -20,21 +28,22 @@ const AdminProductsPage = () => {
   }, []);
 
   const createProductHandler = async () => {
-    // ... same as before
+    // ... this function should already be correct
   };
 
-  // 2. Add the delete handler function
   const deleteHandler = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
+        // --- THIS IS THE FIX ---
+        // Create config object with the admin's token
         const config = {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
           },
         };
+        // Pass the config object to axios
         await axios.delete(`/api/products/${id}`, config);
-        // Refetch products to update the list
-        fetchProducts();
+        fetchProducts(); // Refetch products to update the list
       } catch (err) {
         alert('Could not delete product.');
         console.error(err);
@@ -42,10 +51,10 @@ const AdminProductsPage = () => {
     }
   };
 
+  // ... the rest of your JSX return statement
   return (
     <div className={styles.adminContainer}>
-      {/* ... header is the same ... */}
-
+      {/* ... header ... */}
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -57,8 +66,6 @@ const AdminProductsPage = () => {
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
               <p>ID: {product._id}</p>
-
-              {/* 3. Add the buttons */}
               <div className={styles.actions}>
                 <Link to={`/admin/product/${product._id}/edit`}>
                   <button className={styles.editButton}>Edit</button>

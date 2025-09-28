@@ -65,3 +65,21 @@
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.wishlistBtn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.wishlistBtn:hover {
+  background-color: #eee;
+}

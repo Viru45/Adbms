@@ -2,19 +2,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { CartContext } from '../context/CartContext';
+import { WishlistContext } from '../context/WishlistContext'; // 1. Import WishlistContext
 import styles from './ProductDetailsPage.module.css';
 
 const ProductDetailsPage = () => {
   const { id: productId } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
+  const { addToWishlist } = useContext(WishlistContext); // 2. Get wishlist function
 
   const [product, setProduct] = useState({});
   const [qty, setQty] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // ✅ THIS IS THE MISSING PART
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -75,6 +76,14 @@ const ProductDetailsPage = () => {
               onClick={addToCartHandler}
             >
               Add to Cart
+            </button>
+
+            {/* 3. "Add to Wishlist" button added */}
+            <button 
+              className={styles.wishlistBtn}
+              onClick={() => addToWishlist(product)}
+            >
+              Add to Wishlist
             </button>
           </div>
         </div>
