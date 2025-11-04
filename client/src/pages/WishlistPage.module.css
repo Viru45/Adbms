@@ -1,0 +1,7 @@
+.wishlistContainer {
+  padding: 2rem 5%;
+}
+
+.wishlistContainer h1 {
+  color: var(--text-primary);
+}

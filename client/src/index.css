@@ -1,3 +1,6 @@
+/* client/src/index.css */
+
+/* Light Theme Variables (Default) */
 :root {
   --background-color: #f0f2f5;
   --card-bg: #ffffff;
@@ -8,16 +11,33 @@
   --border-color: #ddd;
 }
 
+/* Dark Theme Variables */
 .dark-theme {
-  --background-color: #1c1c1e;
-  --card-bg: #2c2c2e;
-  --header-bg: #2c2c2e;
-  --text-primary: #ffffff;
+  --background-color: #121212; /* Darker background */
+  --card-bg: #1e1e1e;       /* Darker card background */
+  --header-bg: #1e1e1e;
+  --text-primary: #ffffff;   /* White text */
   --text-secondary: #a0a0a0;
   --primary-color: #0a84ff;
   --border-color: #444;
 }
 
+/* Global Styles */
 body {
+  background-color: var(--background-color);
+  color: var(--text-primary);
   transition: background-color 0.3s, color 0.3s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }

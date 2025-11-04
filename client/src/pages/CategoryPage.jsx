@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import homeStyles from './HomePage.module.css';
-import Pagination from '../components/common/Pagination.jsx'; // Make sure this component exists and the path is correct
+import Pagination from '../components/common/Pagination.jsx';
 
 const CategoryPage = () => {
   const { categoryName, pageNumber } = useParams();
@@ -16,9 +16,8 @@ const CategoryPage = () => {
     const fetchProductsByCategory = async () => {
       try {
         setLoading(true);
-        // We also need to send the page number to the API
         const { data } = await axios.get(`/api/products?category=${categoryName}&pageNumber=${pageNumber || 1}`);
-        setProducts(data.products); // <-- THIS IS THE FIX
+        setProducts(data.products);
         setPage(data.page);
         setPages(data.pages);
         setLoading(false);
@@ -33,7 +32,10 @@ const CategoryPage = () => {
   return (
     <div className={homeStyles.homePage}>
       <section className={homeStyles.showcase}>
-        <h2 className={homeStyles.showcaseTitle}>{categoryName}</h2>
+        <h2 className={homeStyles.showcaseTitle}>
+          {/* Capitalize the first letter of the category name */}
+          {categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
+        </h2>
         {loading ? (
           <p>Loading products...</p>
         ) : error ? (

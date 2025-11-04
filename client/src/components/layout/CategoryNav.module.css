@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: center;
   padding: 0.8rem 5%;
-  background: white;
-  border-bottom: 1px solid #eee;
+  background: var(--header-bg); /* Changed */
+  border-bottom: 1px solid var(--border-color); /* Changed */
 }
 
 .categoryItem {
@@ -12,7 +12,7 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #333;
+  color: var(--text-primary); /* Changed */
   margin: 0 1.5rem;
   font-size: 0.9rem;
   font-weight: 500;
@@ -24,5 +24,5 @@
 }
 
 .categoryItem:hover {
-  color: #007bff;
+  color: var(--primary-color); /* Changed */
 }

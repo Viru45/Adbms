@@ -5,12 +5,15 @@
   padding: 2rem 5%;
 }
 
+/* ... other styles ... */
 .profileForm, .profileOrders {
-  background: white;
+  background: var(--card-bg); /* Changed */
+  color: var(--text-primary); /* Changed */
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+/* ... other styles ... */
 
 .profileForm h2, .profileOrders h2 {
   margin-top: 0;

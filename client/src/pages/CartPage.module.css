@@ -7,12 +7,16 @@
 
 .cartItems h1 {
   margin-top: 0;
+  color: var(--text-primary);
 }
 
 .emptyCart {
-  background: #f0f2f5;
-  padding: 1rem;
-  border-radius: 5px;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  text-align: center;
 }
 
 .cartItem {
@@ -20,7 +24,7 @@
   grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
   gap: 1rem;
   align-items: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-color);
   padding: 1rem 0;
 }
 
@@ -33,12 +37,16 @@
 
 .cartItem a {
   text-decoration: none;
-  color: #333;
+  color: var(--text-primary);
   font-weight: bold;
 }
 
 .cartItem select {
   padding: 0.5rem;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
 }
 
 .removeButton {
@@ -50,14 +58,15 @@
 }
 
 .summaryCard {
-  background: #f0f2f5;
-  border-radius: 5px;
+  background: var(--card-bg);
+  border-radius: 8px;
   padding: 1.5rem;
+  border: 1px solid var(--border-color);
 }
 
 .summaryCard h2 {
   margin-top: 0;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 0.5rem;
 }
 
@@ -73,7 +82,7 @@
   padding: 1rem;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
   font-size: 1.2rem;
   font-weight: bold;

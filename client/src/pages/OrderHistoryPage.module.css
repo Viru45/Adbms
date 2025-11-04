@@ -2,36 +2,38 @@
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
-  background: white;
+  background: var(--card-bg); /* Changed */
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .ordersContainer h1 {
   margin-top: 0;
+  color: var(--text-primary); /* Changed */
 }
 
 .ordersTable {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1.5rem;
+  color: var(--text-primary); /* Changed */
 }
 
 .ordersTable th, .ordersTable td {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color); /* Changed */
   padding: 0.8rem;
   text-align: left;
 }
 
 .ordersTable th {
-  background-color: #f8f9fa;
+  background-color: var(--background-color); /* Changed */
   font-weight: bold;
 }
 
 .paid {
-  color: green;
+  color: #28a745; /* Using a vibrant green */
 }
 
 .notPaid {
-  color: red;
+  color: #dc3545; /* Using a vibrant red */
 }

@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { WishlistContext } from '../context/WishlistContext';
-import homeStyles from './HomePage.module.css'; // Reuse homepage styles
-import cartStyles from './CartPage.module.css'; // Reuse cart styles
+import styles from './WishlistPage.module.css'; // Use new CSS file
+import homeStyles from './HomePage.module.css';
+import cartStyles from './CartPage.module.css';
 
 const WishlistPage = () => {
   const { wishlistItems, removeFromWishlist } = useContext(WishlistContext);
 
   return (
-    <div style={{ padding: '2rem 5%' }}>
+    <div className={styles.wishlistContainer}>
       <h1>My Wishlist</h1>
       {wishlistItems.length === 0 ? (
         <div className={cartStyles.emptyCart}>
@@ -38,4 +39,4 @@ const WishlistPage = () => {
   );
 };
 
-export default WishlistPage;  
+export default WishlistPage;

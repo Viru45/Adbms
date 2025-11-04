@@ -1,22 +1,26 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext.jsx';
-import styles from './AuthForm.module.css'; // Import the same CSS module
+import styles from './AuthForm.module.css';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/api/auth/register', { name, email, password });
-      login(data);
-      navigate('/');
+      // We don't need the response data anymore
+      await axios.post('/api/auth/register', { name, email, password });
+      
+      // Show a success message
+      alert('Registration successful! Please log in.');
+      
+      // Redirect to the login page
+      navigate('/login');
+
     } catch (error) {
       console.error(error.response.data);
       alert('Error during registration!');

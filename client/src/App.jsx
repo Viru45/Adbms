@@ -27,24 +27,22 @@ import AdminRoute from './components/auth/AdminRoute.jsx';
 function App() {
   return (
     <Routes>
-      {/* Standalone public routes */}
+      {/* Standalone public routes (no header/navbar) */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
-      {/* Main application layout */}
-      <Route path="/" element={<MainLayout />}>
-        {/* Public pages */}
-        <Route index element={<HomePage />} />
-        <Route path="page/:pageNumber" element={<HomePage />} />
-        <Route path="product/:id" element={<ProductDetailsPage />} />
-        <Route path="search/:keyword" element={<SearchPage />} />
-        <Route path="search/:keyword/page/:pageNumber" element={<SearchPage />} />
-        <Route path="category/:categoryName" element={<CategoryPage />} />
-        <Route path="category/:categoryName/page/:pageNumber" element={<CategoryPage />} />
-        <Route path="contact" element={<ContactPage />} />
-
-        {/* Protected user pages */}
-        <Route element={<ProtectedRoute />}>
+      {/* This ENTIRE section is now protected */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<MainLayout />}>
+          {/* All pages inside here require login */}
+          <Route index element={<HomePage />} />
+          <Route path="page/:pageNumber" element={<HomePage />} />
+          <Route path="product/:id" element={<ProductDetailsPage />} />
+          <Route path="search/:keyword" element={<SearchPage />} />
+          <Route path="search/:keyword/page/:pageNumber" element={<SearchPage />} />
+          <Route path="category/:categoryName" element={<CategoryPage />} />
+          <Route path="category/:categoryName/page/:pageNumber" element={<CategoryPage />} />
+          <Route path="contact" element={<ContactPage />} />
           <Route path="wishlist" element={<WishlistPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="shipping" element={<ShippingPage />} />
@@ -52,13 +50,13 @@ function App() {
           <Route path="placeorder" element={<PlaceOrderPage />} />
           <Route path="orders" element={<OrderHistoryPage />} />
           <Route path="profile" element={<ProfilePage />} />
-        </Route>
 
-        {/* Protected admin pages */}
-        <Route element={<AdminRoute />}>
-          <Route path="admin/products" element={<AdminProductsPage />} />
-          <Route path="admin/products/page/:pageNumber" element={<AdminProductsPage />} />
-          <Route path="admin/product/:id/edit" element={<ProductEditPage />} />
+          {/* Admin routes are double-protected (user + admin) */}
+          <Route element={<AdminRoute />}>
+            <Route path="admin/products" element={<AdminProductsPage />} />
+            <Route path="admin/products/page/:pageNumber" element={<AdminProductsPage />} />
+            <Route path="admin/product/:id/edit" element={<ProductEditPage />} />
+          </Route>
         </Route>
       </Route>
     </Routes>

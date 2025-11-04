@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { CartContext } from '../context/CartContext';
-import { WishlistContext } from '../context/WishlistContext'; // 1. Import WishlistContext
+import { WishlistContext } from '../context/WishlistContext';
+import toast from 'react-hot-toast';
 import styles from './ProductDetailsPage.module.css';
 
 const ProductDetailsPage = () => {
   const { id: productId } = useParams();
-  const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
-  const { addToWishlist } = useContext(WishlistContext); // 2. Get wishlist function
+  const { addToWishlist } = useContext(WishlistContext);
 
   const [product, setProduct] = useState({});
   const [qty, setQty] = useState(1);
@@ -33,7 +33,11 @@ const ProductDetailsPage = () => {
 
   const addToCartHandler = () => {
     addToCart(product, Number(qty));
-    navigate('/cart');
+    toast.success(`${product.name} added to cart!`);
+  };
+
+  const addToWishlistHandler = () => {
+    addToWishlist(product);
   };
 
   if (loading) return <p>Loading product...</p>;
@@ -78,10 +82,9 @@ const ProductDetailsPage = () => {
               Add to Cart
             </button>
 
-            {/* 3. "Add to Wishlist" button added */}
             <button 
               className={styles.wishlistBtn}
-              onClick={() => addToWishlist(product)}
+              onClick={addToWishlistHandler}
             >
               Add to Wishlist
             </button>

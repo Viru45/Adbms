@@ -3,9 +3,10 @@ import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import styles from './HomePage.module.css';
 import Pagination from '../components/common/Pagination.jsx';
+import HeroCarousel from '../components/home/HeroCarousel.jsx'; // 1. Import Carousel
 
 const HomePage = () => {
-  const { pageNumber } = useParams() || { pageNumber: 1 };
+  const { pageNumber = 1 } = useParams();
 
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
@@ -32,9 +33,8 @@ const HomePage = () => {
 
   return (
     <div className={styles.homePage}>
-      <div className={styles.heroBanner}>
-        <img src="https://via.placeholder.com/1200x300.png?text=Festival+of+Electronics+Sale" alt="Promotional Banner" />
-      </div>
+      {/* 2. Replace the old banner with the new carousel component */}
+      <HeroCarousel />
 
       <section className={styles.showcase}>
         <h2 className={styles.showcaseTitle}>Latest Products</h2>
